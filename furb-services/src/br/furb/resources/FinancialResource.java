@@ -5,8 +5,10 @@ import java.util.Date;
 import java.util.List;
 
 import javax.ws.rs.GET;
+import javax.ws.rs.HeaderParam;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
 
 import br.furb.model.DetailsFinancialItem;
 import br.furb.model.FinancialItem;
@@ -15,8 +17,8 @@ import br.furb.model.FinancialItem;
 public class FinancialResource {
 	
 	@GET
-	@Produces("application/json")
-	public List<FinancialItem> getFinancialItems() {
+	@Produces(MediaType.APPLICATION_JSON)
+	public List<FinancialItem> getFinancialItems(@HeaderParam("token") String token) {
 		List<FinancialItem> items = new ArrayList<>();
 		
 		/*
@@ -42,7 +44,13 @@ public class FinancialResource {
 			item.setConvenant("Conenant " + i);
 			item.setDatePayment(new Date());
 			item.setDeductions(i / 2);
-			item.setDetails(listDetails);			
+			item.setDetails(listDetails);		
+			item.setDiscount(i / 2);
+			item.setDueDate(new Date());
+			item.setFine(i / 2);
+			item.setGrossValue(i / 2);
+			item.setIncrease(i / 2);
+			items.add(item);
 		}
 		
 		return items;

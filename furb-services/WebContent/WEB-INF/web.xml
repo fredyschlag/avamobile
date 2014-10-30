@@ -3,11 +3,15 @@
 	<display-name>furb-services</display-name>
 	<servlet>
 		<servlet-name>furb</servlet-name>
-		<servlet-class>org.glassfish.jersey.servlet.ServletContainer</servlet-class>
+		<servlet-class>com.sun.jersey.spi.container.servlet.ServletContainer</servlet-class>
 		<init-param>
-			<param-name>jersey.config.server.provider.packages</param-name>
+			<param-name>com.sun.jersey.config.property.packages</param-name>
 			<param-value>br.furb.resources</param-value>
 		</init-param>				
+		<init-param>
+			<param-name>com.sun.jersey.api.json.POJOMappingFeature</param-name>
+			<param-value>true</param-value>
+		</init-param>		
 		<load-on-startup>1</load-on-startup>
 	</servlet>		
 	
