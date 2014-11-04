@@ -13,7 +13,7 @@ import com.sun.jersey.api.client.filter.ClientFilter;
 import com.sun.jersey.api.representation.Form;
 import com.sun.jersey.core.util.MultivaluedMapImpl;
 
-public class FinancialClientHTTP {
+public class FinancialClient {
 	
 	public static void main(String[] args) {
 		Client client = Client.create();
