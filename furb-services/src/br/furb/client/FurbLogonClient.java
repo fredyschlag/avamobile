@@ -5,13 +5,13 @@ import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.WebResource;
 import com.sun.jersey.api.representation.Form;
 
-public class LogonClient {
+public class FurbLogonClient {
 	
 	private Client client;
 	private String user;
 	private String password;
 	
-	public LogonClient(Client client, String user, String password) {
+	public FurbLogonClient(Client client, String user, String password) {
 		this.client = client;
 		this.user = user;
 		this.password = password;

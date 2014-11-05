@@ -1,8 +1,11 @@
 package br.furb.client;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.ws.rs.core.MultivaluedMap;
+
+import br.furb.model.FinancialItem;
 
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientHandlerException;
@@ -14,6 +17,19 @@ import com.sun.jersey.api.representation.Form;
 import com.sun.jersey.core.util.MultivaluedMapImpl;
 
 public class FinancialClient {
+	
+	private Client client;
+	
+	public List<String> listCourses() {
+		return null;
+	}
+	
+	public List<FinancialItem> listItems(String course) {
+		return null;
+	}
+	
+	
+	
 	
 	public static void main(String[] args) {
 		Client client = Client.create();
