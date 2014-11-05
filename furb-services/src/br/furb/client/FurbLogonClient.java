@@ -18,12 +18,17 @@ public class FurbLogonClient {
 	}
 	
 	public void logon() {
-		WebResource webResource = client.resource("https://www.furb.br/academico/validaLogon");		
+		WebResource webResource = client.resource("https://www.furb.br/academico/servicosAcademicos");
+		ClientResponse response = webResource.get(ClientResponse.class);
+		ClientUtils.logResponse(response);		
+		
+		webResource = client.resource("https://www.furb.br/academico/validaLogon");		
 		Form form = new Form();
 		form.putSingle("nm_login", user);
 		form.putSingle("ds_senha", password);
 		//form.putSingle("nome_servlet", "/academico/uFinanca");		
-		ClientResponse response = webResource.type("application/x-www-form-urlencoded").post(ClientResponse.class, form);				
+		response = webResource.type("application/x-www-form-urlencoded").post(ClientResponse.class, form);
+		ClientUtils.logResponse(response);
 		//TODO se ocorreu falha, lançar exceção
 	}
 

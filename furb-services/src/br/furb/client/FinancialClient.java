@@ -5,7 +5,12 @@ import java.util.List;
 
 import javax.ws.rs.core.MultivaluedMap;
 
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.select.Elements;
+
 import br.furb.model.FinancialItem;
+import br.furb.model.Link;
 
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientHandlerException;
@@ -20,17 +25,30 @@ public class FinancialClient {
 	
 	private Client client;
 	
-	public List<String> listCourses() {
-		return null;
+	public FinancialClient(Client client) {
+		this.client = client;
+	}		
+	
+	public List<Link> listLinks() {		
+		WebResource webResource = client.resource("https://www.furb.br/academico/uFinanca");
+		ClientResponse response = webResource.get(ClientResponse.class);
+		String html = ClientUtils.logResponse(response);
+		return FinancialUtils.parseLinks(html);
 	}
 	
-	public List<FinancialItem> listItems(String course) {
+	public List<FinancialItem> listItems(Link link) {
+		WebResource webResource = client.resource("https://www.furb.br/academico/consaFinanca");		
+		Form form = new Form();
+		form.putSingle("vinculo", link.getId());
+		form.putSingle("nome", link.getName());
+		form.putSingle("curso", link.getCourse());
+		form.putSingle("ds_vinculo", link.getDescription());
+		
+		ClientResponse response = webResource.type("application/x-www-form-urlencoded").post(ClientResponse.class, form);
+		String html = ClientUtils.logResponse(response);
 		return null;
 	}
-	
-	
-	
-	
+				
 	public static void main(String[] args) {
 		Client client = Client.create();
 		

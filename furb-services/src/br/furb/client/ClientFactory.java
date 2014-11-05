@@ -34,6 +34,7 @@ public class ClientFactory {
 		    }
 		});
 		
+		client.setFollowRedirects(false);		
 		return client;
 	}
 
