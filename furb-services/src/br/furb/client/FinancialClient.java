@@ -1,13 +1,10 @@
 package br.furb.client;
 
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.ws.rs.core.MultivaluedMap;
-
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.jsoup.select.Elements;
 
 import br.furb.model.FinancialItem;
 import br.furb.model.Link;
@@ -36,7 +33,7 @@ public class FinancialClient {
 		return FinancialUtils.parseLinks(html);
 	}
 	
-	public List<FinancialItem> listItems(Link link) {
+	public List<FinancialItem> listItems(Link link) throws ParseException {
 		WebResource webResource = client.resource("https://www.furb.br/academico/consaFinanca");		
 		Form form = new Form();
 		form.putSingle("vinculo", link.getId());
@@ -46,7 +43,7 @@ public class FinancialClient {
 		
 		ClientResponse response = webResource.type("application/x-www-form-urlencoded").post(ClientResponse.class, form);
 		String html = ClientUtils.logResponse(response);
-		return null;
+		return FinancialUtils.parseItems(html);
 	}
 				
 	public static void main(String[] args) {
