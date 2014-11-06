@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.ws.rs.core.MultivaluedMap;
 
+import br.furb.model.DetailsFinancialItem;
 import br.furb.model.FinancialItem;
 import br.furb.model.Link;
 
@@ -44,6 +45,19 @@ public class FinancialClient {
 		ClientResponse response = webResource.type("application/x-www-form-urlencoded").post(ClientResponse.class, form);
 		String html = ClientUtils.logResponse(response);
 		return FinancialUtils.parseItems(html);
+	}
+	
+	public List<DetailsFinancialItem> listDetails(Link link, FinancialItem item) throws ParseException {
+		WebResource webResource = client.resource("https://www.furb.br/academico/consaDetalheBloquete");
+		MultivaluedMap<String, String> params = new MultivaluedMapImpl();
+		params.add("numeroBloquete", item.getDetailsId());
+		params.add("vinculo", link.getId());
+		params.add("nome", link.getName());
+		params.add("curso", link.getCourse());
+		params.add("ds_vinculo", link.getDescription()); 
+		ClientResponse response = webResource.queryParams(params).get(ClientResponse.class);
+		String html = ClientUtils.logResponse(response);
+		return FinancialUtils.parseDetailsItem(html);
 	}
 				
 	public static void main(String[] args) {

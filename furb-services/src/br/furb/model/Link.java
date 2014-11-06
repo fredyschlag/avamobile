@@ -1,13 +1,16 @@
 package br.furb.model;
 
-public class Link {
+import javax.xml.bind.annotation.XmlRootElement;
 
-	private int id;
+@XmlRootElement
+public class Link {
+	
+	private String id;
 	private String name;
 	private String course;
 	private String description;
-
-	public Link(int id) {
+	
+	public void setId(String id) {
 		this.id = id;
 	}
 
@@ -31,7 +34,7 @@ public class Link {
 		this.description = description;
 	}
 
-	public int getId() {
+	public String getId() {
 		return id;
 	}
 

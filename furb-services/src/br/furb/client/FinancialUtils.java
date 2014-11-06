@@ -14,6 +14,7 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
+import br.furb.model.DetailsFinancialItem;
 import br.furb.model.FinancialItem;
 import br.furb.model.Link;
 
@@ -32,7 +33,8 @@ public class FinancialUtils {
 		List<Link> linkList = new ArrayList<Link>();
 
 		for (int i = 0; i < links.size(); i++) {
-			Link link = new Link(Integer.valueOf(links.get(i).val()));
+			Link link = new Link();
+			link.setId(links.get(i).val());
 			link.setName(names.get(i).val());
 			link.setCourse(courses.get(i).val());
 			link.setDescription(linksDescriptions.get(i).val());
@@ -89,8 +91,11 @@ public class FinancialUtils {
 			item.setFine(getDoubleValue(cols, 6));
 			item.setDatePayment(getDateValue(cols, 7));
 			item.setAmountPaid(getDoubleValue(cols, 8));
-			
-			//TODO consultar detalhes
+			/*
+			 * Faz o parser do link 
+			 * Exemplo: &nbsp;&nbsp;<a href='/academico/consaDetalheBloquete?numeroBloquete=ID&vinculo=VINCULO&nome=NOME&curso=CURSO&ds_vinculo=DESC
+			 */
+			item.setDetailsId(getStringValue(cols, 9).split("\\?")[1].split("&")[0].split("=")[1]);
 			list.add(item);
 		}
 
@@ -101,5 +106,35 @@ public class FinancialUtils {
 		Document document = Jsoup.parse(html);
 		return parseItems(document);
 	}
+
+	public static List<DetailsFinancialItem> parseDetailsItem(Document document) throws ParseException {
+		Elements tables = document.getElementsByAttributeValue("class", "bodyTable");
+		Element table = tables.get(0); 
+		Elements rows = table.getElementsByTag("tr");
+		List<DetailsFinancialItem> list = new ArrayList<>();
+
+		for (int i = 1; i < rows.size(); i++) {
+			Element row = rows.get(i);
+			Elements cols = row.getElementsByTag("font");
+			DetailsFinancialItem item = new DetailsFinancialItem();
+			item.setDescription(getStringValue(cols, 0));
+			item.setIssueDate(getDateValue(cols, 1));
+			item.setGrossValue(getDoubleValue(cols, 2));
+			item.setDiscount(getDoubleValue(cols, 3));
+			item.setDeductions(getDoubleValue(cols, 4));
+			item.setIncrease(getDoubleValue(cols, 5));
+			item.setFine(getDoubleValue(cols, 6));
+			list.add(item);
+		}
+
+		return list;
+	}
+	
+	
+	public static List<DetailsFinancialItem> parseDetailsItem(String html) throws ParseException {
+		Document document = Jsoup.parse(html);
+		return parseDetailsItem(document);
+	}
+
 
 }

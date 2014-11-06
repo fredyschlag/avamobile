@@ -1,29 +1,38 @@
 package br.furb.resources;
 
-import java.util.ArrayList;
-import java.util.Date;
+import java.text.ParseException;
 import java.util.List;
 
+import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.HeaderParam;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
-import br.furb.model.DetailsFinancialItem;
+import br.furb.client.FinancialClient;
+import br.furb.login.TokenLogin;
+import br.furb.login.TokensController;
 import br.furb.model.FinancialItem;
+import br.furb.model.Link;
 
 @Path("/financial")
 public class FinancialResource {
 	
+	@Path("/items")
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	public List<FinancialItem> getFinancialItems(@HeaderParam("token") String token) {
-		List<FinancialItem> items = new ArrayList<>();
+	public List<FinancialItem> getFinancialItems(@HeaderParam("token") String token) throws ParseException {
+		TokenLogin tokenLogin = null;//TokensController.getInstance().getToken(token);
+		FinancialClient client = new FinancialClient(tokenLogin.getClient());
+		return client.listItems(null);
+		
+		//List<FinancialItem> items = new ArrayList<>();
 		
 		/*
 		 * Exemplo de dados 
-		 */
+		 *
 		for (int i = 0; i < 2; i++) {
 			List<DetailsFinancialItem> listDetails = new ArrayList<>();
 			
@@ -54,6 +63,16 @@ public class FinancialResource {
 		}
 		
 		return items;
+		*/
+	}
+	
+	@Path("/links")
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	public List<Link> getLinks(@HeaderParam("token") String token) {
+		TokenLogin tokenLogin = TokensController.getInstance().getToken(token);
+		FinancialClient client = new FinancialClient(tokenLogin.getClient());
+		return client.listLinks();
 	}
 	
 

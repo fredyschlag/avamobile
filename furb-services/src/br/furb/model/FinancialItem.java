@@ -8,21 +8,31 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 public class FinancialItem {
 
-	private Date dueDate; //Data de vencimento
-	private String convenant; //Convênio
-	private double grossValue; //Valor bruto
-	private double discount; //Abatimento/Desconto
-	private double deductions; //Deduções
-	private double increase; //Acréscimo
-	private double fine; //Multa
-	private Date datePayment; //Data de pagamento
-	private double amountPaid; //Valor pago
-	
+	private Date dueDate; // Data de vencimento
+	private String convenant; // Convênio
+	private double grossValue; // Valor bruto
+	private double discount; // Abatimento/Desconto
+	private double deductions; // Deduções
+	private double increase; // Acréscimo
+	private double fine; // Multa
+	private Date datePayment; // Data de pagamento
+	private double amountPaid; // Valor pago
+	private String detailsId;
+
+	public String getDetailsId() {
+		return detailsId;
+	}
+
+	public void setDetailsId(String detailsId) {
+		this.detailsId = detailsId;
+	}
+
 	/**
 	 * Detalhes
+	 * 
 	 * @see DetailsFinancialItem
 	 */
-	private List<DetailsFinancialItem> details; 
+	private List<DetailsFinancialItem> details;
 
 	/**
 	 * 
@@ -34,7 +44,8 @@ public class FinancialItem {
 
 	/**
 	 * 
-	 * @param dueDate Data de vencimento
+	 * @param dueDate
+	 *            Data de vencimento
 	 */
 	public void setDueDate(Date dueDate) {
 		this.dueDate = dueDate;
@@ -50,7 +61,8 @@ public class FinancialItem {
 
 	/**
 	 * 
-	 * @param convenant Convênio
+	 * @param convenant
+	 *            Convênio
 	 */
 	public void setConvenant(String convenant) {
 		this.convenant = convenant;
@@ -66,7 +78,8 @@ public class FinancialItem {
 
 	/**
 	 * 
-	 * @param grossValue Valor bruto
+	 * @param grossValue
+	 *            Valor bruto
 	 */
 	public void setGrossValue(double grossValue) {
 		this.grossValue = grossValue;
@@ -82,7 +95,8 @@ public class FinancialItem {
 
 	/**
 	 * 
-	 * @param discount Abatimento/Desconto
+	 * @param discount
+	 *            Abatimento/Desconto
 	 */
 	public void setDiscount(double discount) {
 		this.discount = discount;
@@ -98,7 +112,8 @@ public class FinancialItem {
 
 	/**
 	 * 
-	 * @param deductions Deduções
+	 * @param deductions
+	 *            Deduções
 	 */
 	public void setDeductions(double deductions) {
 		this.deductions = deductions;
@@ -114,7 +129,8 @@ public class FinancialItem {
 
 	/**
 	 * 
-	 * @param increase Acréscimo
+	 * @param increase
+	 *            Acréscimo
 	 */
 	public void setIncrease(double increase) {
 		this.increase = increase;
@@ -130,7 +146,8 @@ public class FinancialItem {
 
 	/**
 	 * 
-	 * @param fine Multa
+	 * @param fine
+	 *            Multa
 	 */
 	public void setFine(double fine) {
 		this.fine = fine;
@@ -146,7 +163,8 @@ public class FinancialItem {
 
 	/**
 	 * 
-	 * @param datePayment Data do pagamento
+	 * @param datePayment
+	 *            Data do pagamento
 	 */
 	public void setDatePayment(Date datePayment) {
 		this.datePayment = datePayment;
@@ -162,7 +180,8 @@ public class FinancialItem {
 
 	/**
 	 * 
-	 * @param amountPaid Valor pago
+	 * @param amountPaid
+	 *            Valor pago
 	 */
 	public void setAmountPaid(double amountPaid) {
 		this.amountPaid = amountPaid;
@@ -178,7 +197,8 @@ public class FinancialItem {
 
 	/**
 	 * 
-	 * @param details Detalhes {@link DetailsFinancialItem}
+	 * @param details
+	 *            Detalhes {@link DetailsFinancialItem}
 	 */
 	public void setDetails(List<DetailsFinancialItem> details) {
 		this.details = details;
