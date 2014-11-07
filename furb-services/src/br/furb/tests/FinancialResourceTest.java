@@ -12,9 +12,6 @@ import br.furb.model.Link;
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.WebResource;
-import com.sun.jersey.api.client.config.ClientConfig;
-import com.sun.jersey.api.client.config.DefaultClientConfig;
-import com.sun.jersey.api.json.JSONConfiguration;
 
 public class FinancialResourceTest {
 
@@ -52,17 +49,19 @@ public class FinancialResourceTest {
 				.resource("http://localhost:8080/furb-services/financial/links");
 		response = webResource.accept("application/json")
 				.header("token", token).get(ClientResponse.class);
-		json = response.getEntity(String.class);
-		JSONArray array = new JSONArray(json);
+		JSONArray array = response.getEntity(JSONArray.class);
 
-		webResource = client
-				.resource("http://localhost:8080/furb-services/financial/items");
+		webResource = client.resource("http://localhost:8080/furb-services/financial/items");
 		object = (JSONObject) array.get(0);
 		Link link = new Link();
 		link.setCourse(object.getString("course"));
 		link.setDescription(object.getString("description"));
 		link.setId(object.getString("id"));
 		link.setName(object.getString("name"));
+		response = webResource.accept("application/json").header("token", token).post(ClientResponse.class, link);
+		json = response.getEntity(String.class);
+		array = new JSONArray(json);
+		
 	}
 
 }
