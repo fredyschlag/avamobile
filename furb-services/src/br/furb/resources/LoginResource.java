@@ -4,6 +4,7 @@ import javax.ws.rs.GET;
 import javax.ws.rs.HeaderParam;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
 
 import org.codehaus.jettison.json.JSONException;
 import org.codehaus.jettison.json.JSONObject;
@@ -16,8 +17,8 @@ import br.furb.login.TokensController;
 import com.sun.jersey.api.client.Client;
 
 @Path("/login")
-public class LoginResource {
-	
+public class LoginResource 
+{	
 	/**
 	 * 
 	 * @param user
@@ -26,23 +27,28 @@ public class LoginResource {
 	 * @throws JSONException 
 	 */	
 	@GET
-	@Produces("application/json")
-	public String login(@HeaderParam("user") String user, @HeaderParam("password") String password) throws JSONException {
+	@Produces(MediaType.APPLICATION_JSON)
+	public String login(@HeaderParam("username") String user, @HeaderParam("password") String password) throws JSONException 
+	{
 		Client client = ClientFactory.createHTTPClient();		
 		TokensController controller = TokensController.getInstance();
-		try {
-			FurbLogonClient furbClient = new FurbLogonClient(client, user, password);					
-			furbClient.logon();				
-			TokenLogin token = controller.generateToken(user, password, client);
+		try 
+		{
+            FurbLogonClient furbClient = new FurbLogonClient(client, user, password);
+            furbClient.logon();
+				
+            TokenLogin token = controller.generateToken(user, password, client);
+			
 			JSONObject json = new JSONObject();
-			json.put("user", token.getUser());		
-			json.put("token", token.getToken());		
+			json.put("username", token.getUser());
+			json.put("token", token.getToken());
 			return json.toString();
-		} catch (Throwable e) {
+		} 
+		catch (Exception e)
+		{
 			JSONObject json = new JSONObject();
-			json.put("error", e.getMessage());				
+			json.put("error", e.getMessage());
 			return json.toString();
 		}
-	}
-	
+	}	
 }

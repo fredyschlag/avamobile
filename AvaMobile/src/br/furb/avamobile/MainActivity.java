@@ -9,6 +9,7 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.protocol.BasicHttpContext;
 import org.apache.http.protocol.HttpContext;
 import org.apache.http.util.EntityUtils;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.app.Activity;
@@ -18,6 +19,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class MainActivity extends Activity 
 {
@@ -54,11 +56,11 @@ public class MainActivity extends Activity
 		new HttpRequestTask().execute();
 	}
 	
-	private class HttpRequestTask extends AsyncTask<Void, Void, User> 
+	private class HttpRequestTask extends AsyncTask<Void, Void, String> 
 	{
 		
         @Override
-        protected User doInBackground(Void... params) 
+        protected String doInBackground(Void... params) 
         {
             try
             {
@@ -80,24 +82,9 @@ public class MainActivity extends Activity
             	httpGet.addHeader("password", senha);
 
         		HttpResponse response = httpClient.execute(httpGet, localContext);        		
-        		
-        		String jsonString = EntityUtils.toString(response.getEntity());
-    			
-        		JSONObject json = new JSONObject(jsonString);
-    						
-        		User user = new User();
-        		
-        		user.setUsername(json.getString("username"));
-        		user.setPassword(json.getString("password"));
-        		user.setToken(json.getInt("token"));
     			
     			/*/
-            	
-	            User usuario = new User(nome, senha);
-	            
-            	JSONObject json = usuario.toJSONObject();
-            	
-            	HttpClient client = new DefaultHttpClient();
+    			// Exemplo com método POST
                 HttpPost post = new HttpPost(url);
                 
                 StringEntity stringEntity = new StringEntity(json.toString());
@@ -107,35 +94,40 @@ public class MainActivity extends Activity
                 
                 post.setEntity(stringEntity);
 
-                HttpResponse response = client.execute(post);
-                
-                System.out.print(response.toString());
-                
-                String responseBody = EntityUtils.toString(response.getEntity());
-                
-                System.out.print(responseBody);
-                
-                User user = new User(responseBody);
+                HttpResponse response = httpClient.execute(post);
                 
                 //*/
+        		
+        		String jsonString = EntityUtils.toString(response.getEntity());
                 
-    			return user;
+    			return jsonString;
             }
             catch (Exception ex)
-            {            
-            	ex.printStackTrace();
-            	return null;
+            {
+            	return "{ \"error\" = \"" + ex.getMessage() + "\" }";
             }
         }
 
         @Override
-        protected void onPostExecute(User usuario)
+        protected void onPostExecute(String jsonString)
         {
-        	if (usuario != null)
+        	try
         	{
+	        	JSONObject json = new JSONObject(jsonString);
+	    		
+	    		if (json.has("error"))
+	    		{
+	    			Toast.makeText(MainActivity.this, json.getString("error"), Toast.LENGTH_LONG).show();
+	    			return;
+	    		}
+	        	
 	            TextView editToken = (TextView) findViewById(R.id.editToken);
 	            
-	            editToken.setText(usuario.getToken());
+	            editToken.setText(Integer.toString(json.getInt("token")));
+        	}
+        	catch (JSONException ex)
+        	{
+        		Toast.makeText(MainActivity.this, ex.getMessage(), Toast.LENGTH_LONG).show();
         	}
         }
     }
