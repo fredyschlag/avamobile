@@ -9,8 +9,72 @@
     tools:context="br.furb.avamobile.MainActivity" >
 
     <TextView
+        android:id="@+id/lbNome"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/hello_world" />
+        android:labelFor="@+id/editNome"
+        android:text="@string/nome" />
+
+    <EditText
+        android:id="@+id/editNome"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/lbNome"
+        android:ems="10"
+        android:inputType="text" >
+
+        <requestFocus />
+    </EditText>
+
+    <TextView
+        android:id="@+id/lbSenha"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/editNome"
+        android:layout_marginTop="20dp"
+        android:labelFor="@+id/editSenha"
+        android:text="@string/senha" />
+
+    <EditText
+        android:id="@+id/editSenha"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/lbSenha"
+        android:ems="10"
+        android:inputType="text" />
+
+    <TextView
+        android:id="@+id/lbToken"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"        
+        android:layout_below="@+id/editSenha"
+        android:layout_marginTop="20dp"
+        android:labelFor="@+id/editToken"
+        android:text="@string/token" />
+
+    <EditText
+        android:id="@+id/editToken"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/lbToken"
+        android:ems="10"
+        android:inputType="text" />
+
+    <Button
+        android:id="@+id/button1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/editToken"
+        android:layout_marginTop="36dp"
+        android:onClick="loginClick"
+        android:text="@string/login" />
 
 </RelativeLayout>

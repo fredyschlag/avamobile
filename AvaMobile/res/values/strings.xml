@@ -4,5 +4,10 @@
     <string name="app_name">AvaMobile</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+    <string name="atualizar">Atualizar</string>
+    <string name="nome">Nome:</string>
+    <string name="senha">Senha:</string>
+    <string name="token">Token</string>
+    <string name="login">Login</string>
 
 </resources>
