@@ -9,5 +9,8 @@
     <string name="senha">Senha:</string>
     <string name="token">Token</string>
     <string name="login">Login</string>
+    <string name="title_activity_menu">MenuActivity</string>
+    <string name="lb_username">Usuário:</string>
+    <string name="consultar_financeiro">Consultar Financeiro</string>
 
 </resources>

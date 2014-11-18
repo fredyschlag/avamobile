@@ -6,7 +6,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="br.furb.avamobile.MainActivity" >
+    tools:context="br.furb.avamobile.activities.MainActivity" >
 
     <TextView
         android:id="@+id/lbNome"
@@ -45,34 +45,15 @@
         android:layout_alignParentStart="true"
         android:layout_below="@+id/lbSenha"
         android:ems="10"
-        android:inputType="text" />
-
-    <TextView
-        android:id="@+id/lbToken"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"        
-        android:layout_below="@+id/editSenha"
-        android:layout_marginTop="20dp"
-        android:labelFor="@+id/editToken"
-        android:text="@string/token" />
-
-    <EditText
-        android:id="@+id/editToken"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/lbToken"
-        android:ems="10"
-        android:inputType="text" />
+        android:inputType="text|textPassword" />
 
     <Button
-        android:id="@+id/button1"
+        android:id="@+id/btnConsultarFinanceiro"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/editToken"
+        android:layout_below="@+id/editSenha"
         android:layout_marginTop="36dp"
         android:onClick="loginClick"
         android:text="@string/login" />
