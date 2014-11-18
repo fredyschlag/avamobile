@@ -6,14 +6,42 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
+    android:background="#0A5FA4"
     tools:context="br.furb.avamobile.activities.MainActivity" >
+
+    <View
+        android:id="@+id/topSeparator"
+        android:layout_width="fill_parent"
+        android:layout_height="0.2dp"
+        android:visibility="visible"
+        android:background="@android:color/white"/>
+    
+    <ImageView
+        android:id="@+id/imgFurb"
+        android:layout_width="fill_parent"
+        android:layout_height="150dp"
+        android:layout_below="@+id/topSeparator"
+        android:adjustViewBounds="true"
+        android:contentDescription="@string/logo_furb"
+        android:src="@drawable/logo" />
+    
+    <View
+        android:id="@+id/bottomSeparator"
+        android:layout_width="fill_parent"
+        android:layout_height="0.2dp"
+        android:layout_below="@+id/imgFurb"
+        android:visibility="visible"
+        android:background="@android:color/white"/>
 
     <TextView
         android:id="@+id/lbNome"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/bottomSeparator"
+        android:layout_marginTop="30dp"
         android:labelFor="@+id/editNome"
-        android:text="@string/nome" />
+        android:text="@string/nome"
+        android:textColor="@android:color/white" />
 
     <EditText
         android:id="@+id/editNome"
@@ -22,8 +50,10 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/lbNome"
+        android:background="@drawable/edit_shape"
         android:ems="10"
-        android:inputType="text" >
+        android:inputType="text"
+        android:textColor="#0A5FA4" >
 
         <requestFocus />
     </EditText>
@@ -35,7 +65,8 @@
         android:layout_below="@+id/editNome"
         android:layout_marginTop="20dp"
         android:labelFor="@+id/editSenha"
-        android:text="@string/senha" />
+        android:text="@string/senha"
+        android:textColor="@android:color/white" />
 
     <EditText
         android:id="@+id/editSenha"
@@ -44,8 +75,10 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/lbSenha"
+        android:background="@drawable/edit_shape"
         android:ems="10"
-        android:inputType="text|textPassword" />
+        android:inputType="text|textPassword"
+        android:textColor="#0A5FA4" />
 
     <Button
         android:id="@+id/btnConsultarFinanceiro"
@@ -55,7 +88,9 @@
         android:layout_alignParentStart="true"
         android:layout_below="@+id/editSenha"
         android:layout_marginTop="36dp"
+        android:background="@drawable/button_shape"
         android:onClick="loginClick"
-        android:text="@string/login" />
+        android:text="@string/acessar"
+        android:textColor="@android:color/white" />
 
 </RelativeLayout>

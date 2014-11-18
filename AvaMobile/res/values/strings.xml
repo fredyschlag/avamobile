@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">AvaMobile</string>
-    <string name="hello_world">Hello world!</string>
-    <string name="action_settings">Settings</string>
-    <string name="atualizar">Atualizar</string>
+    <string name="app_name">FURB Mobile</string>
     <string name="nome">Nome:</string>
     <string name="senha">Senha:</string>
     <string name="token">Token</string>
@@ -12,5 +9,7 @@
     <string name="title_activity_menu">MenuActivity</string>
     <string name="lb_username">Usuário:</string>
     <string name="consultar_financeiro">Consultar Financeiro</string>
+    <string name="logo_furb">Logo FURB</string>
+    <string name="acessar">ACESSAR</string>
 
 </resources>

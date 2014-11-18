@@ -6,20 +6,25 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
+    android:background="#0A5FA4"
     tools:context="br.furb.avamobile.activities.MenuActivity" >
 
     <TextView
         android:id="@+id/lbUsername"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/lb_username" />
+        android:text="@string/lb_username"
+        android:textColor="@android:color/white" />
 
     <TextView
         android:id="@+id/txtUsername"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
-        android:layout_toEndOf="@+id/lbUsername" />
+        android:layout_marginStart="10dp"
+        android:layout_toEndOf="@+id/lbUsername"
+        android:textColor="@android:color/white"
+        android:textStyle="bold" />
 
     <Button
         android:id="@+id/btnConsultarFinanceiro"
@@ -29,6 +34,8 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_marginTop="30dp"
-        android:text="@string/consultar_financeiro" />
+        android:background="@drawable/button_shape"
+        android:text="@string/consultar_financeiro"
+        android:textColor="@android:color/white" />
 
 </RelativeLayout>
