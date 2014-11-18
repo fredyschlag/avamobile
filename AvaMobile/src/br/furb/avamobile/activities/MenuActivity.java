@@ -54,5 +54,11 @@ public class MenuActivity extends Activity
 		
 		token = getIntent().getStringExtra("token");
 	}
+	
+	@Override
+	public void onBackPressed()
+	{
+		//
+	}
 
 }
