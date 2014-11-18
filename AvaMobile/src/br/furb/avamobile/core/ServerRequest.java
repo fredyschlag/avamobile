@@ -33,16 +33,16 @@ public class ServerRequest extends AsyncTask<NameValuePair, String, HttpResponse
 	
 	@Override
 	protected HttpResponse doInBackground(NameValuePair... params)
-	{			
-		HttpClient httpClient = new DefaultHttpClient();
-    	HttpContext localContext = new BasicHttpContext();
-    	HttpGet httpGet = new HttpGet(url);
-    	
-    	for (NameValuePair param : params)
-    		httpGet.addHeader(param.getName(), param.getValue());		
-		
-    	try
+	{	
+		try
     	{
+			HttpClient httpClient = new DefaultHttpClient();
+	    	HttpContext localContext = new BasicHttpContext();
+	    	HttpGet httpGet = new HttpGet(url);
+	    	
+	    	for (NameValuePair param : params)
+	    		httpGet.addHeader(param.getName(), param.getValue());
+			
     		return httpClient.execute(httpGet, localContext);
     	}
     	catch (Exception ex)
@@ -68,6 +68,9 @@ public class ServerRequest extends AsyncTask<NameValuePair, String, HttpResponse
 	{
 		try
 		{
+			if (result == null)
+				throw new Exception("Bad communication with web-service");
+			
 			StatusLine statusLine = result.getStatusLine();
 			
 			if (statusLine.getStatusCode() != HttpURLConnection.HTTP_OK)
@@ -85,7 +88,7 @@ public class ServerRequest extends AsyncTask<NameValuePair, String, HttpResponse
 	
 	private boolean isOnline()
 	{	
-		ConnectivityManager connMgr = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+		ConnectivityManager connMgr = (ConnectivityManager)context.getSystemService(Context.CONNECTIVITY_SERVICE);
 		NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
 		return (networkInfo != null && networkInfo.isConnected());
 	}

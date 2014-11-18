@@ -8,6 +8,7 @@ import org.json.JSONObject;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -52,51 +53,52 @@ public class MainActivity extends Activity implements ServerRequestListener
 	@Override
 	public void onRequestComplete(String response, boolean error)
 	{
-		progress.dismiss();		
-		try 
+		progress.dismiss();
+		
+		if (!error)
 		{
-			JSONObject json = new JSONObject(response);
-			
-			if ((!error) && (json.has("error")))
+			try 
+			{
+				JSONObject json = new JSONObject(response);
+				
+				if ((!error) && (json.has("error")))
+				{
+					error = true;
+					response = json.getString("error");
+				}
+				
+				if (!error)
+				{
+					String token = json.getString("token");
+					
+					/*
+					SharedPreferences preferences = getSharedPreferences("token-login", MODE_PRIVATE);
+					SharedPreferences.Editor editor = preferences.edit();
+				
+					editor.putString("token", token);
+					
+					// Gravamos a session
+					editor.commit();
+					*/
+					
+					if (!token.equals(""))
+		    		{
+		    			TextView edtNome = (TextView) findViewById(R.id.editNome);
+		    			
+		    			Intent i = new Intent(MainActivity.this, MenuActivity.class);
+		    	    	
+		    			i.putExtra("username", edtNome.getText().toString());
+		    			i.putExtra("token", token);
+		    			
+		    	    	startActivity(i);
+		    		}
+				}
+			}
+			catch (JSONException e) 
 			{
 				error = true;
-				response = json.getString("error");
+				response = e.getMessage();
 			}
-			
-			if (!error)
-			{
-				/*
-				SharedPreferences preferences = getSharedPreferences("token-login", MODE_PRIVATE);
-				SharedPreferences.Editor editor = preferences.edit();
-			
-				if (!json.has("error"))
-					editor.putInt("token", json.getInt("token"));
-				else
-					editor.putInt("token", 0);
-				
-				// Gravamos a session
-				editor.commit();
-				*/
-				
-				int token = json.getInt("token");
-				
-				if (token != 0)
-	    		{
-	    			TextView edtNome = (TextView) findViewById(R.id.editNome);
-	    			
-	    			Intent i = new Intent(MainActivity.this, MenuActivity.class);
-	    	    	
-	    			i.putExtra("username", edtNome.getText().toString());
-	    			i.putExtra("token", Integer.toString(token));
-	    			
-	    	    	startActivity(i);
-	    		}
-			}
-		}
-		catch (JSONException e) 
-		{
-			error = true;
-			response = e.getMessage();
 		}
 		
 		if (error) Toast.makeText(this, response, Toast.LENGTH_LONG).show();

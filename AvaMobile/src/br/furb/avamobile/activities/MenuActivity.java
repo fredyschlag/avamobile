@@ -10,7 +10,7 @@ import br.furb.avamobile.R;
 
 public class MenuActivity extends Activity
 {
-	int token;
+	String token;
 	
 	Button btnConsultaFinanceiro;
 	
@@ -28,7 +28,7 @@ public class MenuActivity extends Activity
 			{
 				// TODO Gielez: Aqui deve ser aberta a interface com a listagem do financeiro
 				
-				if (token != 0)
+				if (!token.equals(""))
 	    		{
 	    			//TextView txtUsername = (TextView) findViewById(R.id.txtUsername);
 	    			
@@ -52,7 +52,7 @@ public class MenuActivity extends Activity
 
 		txtUsername.setText(getIntent().getStringExtra("username"));
 		
-		token =  getIntent().getIntExtra("token", 0);
+		token = getIntent().getStringExtra("token");
 	}
 
 }
