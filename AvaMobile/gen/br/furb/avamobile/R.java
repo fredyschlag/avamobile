@@ -23,21 +23,25 @@ public final class R {
     }
     public static final class drawable {
         public static final int button_shape=0x7f020000;
-        public static final int edit_shape=0x7f020001;
-        public static final int ic_launcher=0x7f020002;
-        public static final int logo=0x7f020003;
+        public static final int checkbox_checked=0x7f020001;
+        public static final int checkbox_selector=0x7f020002;
+        public static final int checkbox_unchecked=0x7f020003;
+        public static final int edit_shape=0x7f020004;
+        public static final int ic_launcher=0x7f020005;
+        public static final int logo=0x7f020006;
     }
     public static final class id {
         public static final int bottomSeparator=0x7f080002;
-        public static final int btnConsultarFinanceiro=0x7f080007;
+        public static final int btnConsultarFinanceiro=0x7f080008;
+        public static final int ckbRemeberPassword=0x7f080007;
         public static final int editNome=0x7f080004;
         public static final int editSenha=0x7f080006;
         public static final int imgFurb=0x7f080001;
         public static final int lbNome=0x7f080003;
         public static final int lbSenha=0x7f080005;
-        public static final int lbUsername=0x7f080008;
+        public static final int lbUsername=0x7f080009;
         public static final int topSeparator=0x7f080000;
-        public static final int txtUsername=0x7f080009;
+        public static final int txtUsername=0x7f08000a;
     }
     public static final class layout {
         public static final int activity_main=0x7f030000;
@@ -52,6 +56,7 @@ public final class R {
         public static final int app_name=0x7f050000;
         public static final int consultar_financeiro=0x7f050007;
         public static final int lb_username=0x7f050006;
+        public static final int lembrar_senha=0x7f05000a;
         public static final int login=0x7f050004;
         public static final int logo_furb=0x7f050008;
         public static final int nome=0x7f050001;

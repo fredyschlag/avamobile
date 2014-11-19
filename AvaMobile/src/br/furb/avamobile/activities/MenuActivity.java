@@ -12,13 +12,17 @@ public class MenuActivity extends Activity
 {
 	String token;
 	
-	Button btnConsultaFinanceiro;
+	Button btnConsultaFinanceiro;	
+	
+	TextView txtUsername;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_menu);
+		
+		txtUsername = (TextView) findViewById(R.id.txtUsername);
 		
 		btnConsultaFinanceiro = (Button) findViewById(R.id.btnConsultarFinanceiro);
 		btnConsultaFinanceiro.setOnClickListener(new OnClickListener()
@@ -47,12 +51,13 @@ public class MenuActivity extends Activity
 	protected void onStart()
 	{
 		super.onStart();
-		
-		TextView txtUsername = (TextView) findViewById(R.id.txtUsername);
 
 		txtUsername.setText(getIntent().getStringExtra("username"));
 		
 		token = getIntent().getStringExtra("token");
+		
+		if (token.equals(""))
+			finish();
 	}
 	
 	@Override

@@ -8,6 +8,7 @@ import org.json.JSONObject;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -21,22 +22,40 @@ public class MainActivity extends Activity implements ServerRequestListener
 {	
 	final String LOGIN_URL = "http://192.168.56.1:8080/furb-services/login";
 	
-	private ProgressDialog progress;
+	ProgressDialog progress;
+	
+	EditText edtUsername;
+	EditText edtPassword;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) 
 	{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+		
+		edtUsername = (EditText) findViewById(R.id.editNome);
+		edtPassword = (EditText) findViewById(R.id.editSenha);
+	}
+	
+	@Override
+	protected void onStart()
+	{	
+		super.onStart();
+		
+		SharedPreferences preferences = getSharedPreferences("login", MODE_PRIVATE);
+		
+		if (preferences.contains("username"))
+			edtUsername.setText(preferences.getString("username", ""));
+		else
+			edtUsername.setText("");
+		
+		edtPassword.setText("");
 	}
 	
 	public void loginClick(View view)
-	{
-		final EditText nome = (EditText) findViewById(R.id.editNome);
-		final EditText senha = (EditText) findViewById(R.id.editSenha);
-		
-		NameValuePair username = new BasicNameValuePair("username", nome.getText().toString());
-		NameValuePair password = new BasicNameValuePair("password", senha.getText().toString());
+	{		
+		NameValuePair username = new BasicNameValuePair("username", edtUsername.getText().toString());
+		NameValuePair password = new BasicNameValuePair("password", edtPassword.getText().toString());
 		
 		ServerRequest loginTask = new ServerRequest(this, LOGIN_URL, this);
 		loginTask.execute(username, password);
@@ -70,23 +89,22 @@ public class MainActivity extends Activity implements ServerRequestListener
 				{
 					String token = json.getString("token");
 					
-					/*
-					SharedPreferences preferences = getSharedPreferences("token-login", MODE_PRIVATE);
-					SharedPreferences.Editor editor = preferences.edit();
-				
-					editor.putString("token", token);
-					
-					// Gravamos a session
-					editor.commit();
-					*/
-					
 					if (!token.equals(""))
 		    		{
 		    			TextView edtNome = (TextView) findViewById(R.id.editNome);
 		    			
+		    			String username = edtNome.getText().toString();
+		    			
+		    			SharedPreferences preferences = getSharedPreferences("login", MODE_PRIVATE);
+						SharedPreferences.Editor editor = preferences.edit();
+					
+						editor.putString("username", username);
+						
+						editor.commit();
+		    			
 		    			Intent i = new Intent(MainActivity.this, MenuActivity.class);
 		    	    	
-		    			i.putExtra("username", edtNome.getText().toString());
+		    			i.putExtra("username", username);
 		    			i.putExtra("token", token);
 		    			
 		    	    	startActivity(i);
