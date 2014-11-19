@@ -10,8 +10,6 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
-import org.codehaus.jettison.json.JSONObject;
-
 import br.furb.client.FinancialClient;
 import br.furb.login.TokenLogin;
 import br.furb.login.TokensController;
@@ -24,7 +22,8 @@ public class FinancialResource {
 	@Path("/items")
 	@POST
 	@Produces(MediaType.APPLICATION_JSON)
-	public List<FinancialItem> getFinancialItems(@HeaderParam("token") String token, Link link) throws ParseException {
+	public List<FinancialItem> getFinancialItems(@HeaderParam("token") String token, Link link) throws ParseException 
+	{
 		TokenLogin tokenLogin = TokensController.getInstance().getToken(token);
 		FinancialClient client = new FinancialClient(tokenLogin.getClient());
 		return client.listItems(link);
@@ -33,7 +32,8 @@ public class FinancialResource {
 	@Path("/links")
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	public List<Link> getLinks(@HeaderParam("token") String token) {
+	public List<Link> getLinks(@HeaderParam("token") String token) 
+	{
 		TokenLogin tokenLogin = TokensController.getInstance().getToken(token);
 		FinancialClient client = new FinancialClient(tokenLogin.getClient());
 		return client.listLinks();

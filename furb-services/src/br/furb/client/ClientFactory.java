@@ -10,20 +10,25 @@ import com.sun.jersey.api.client.filter.ClientFilter;
 
 public class ClientFactory {
 	
-	public static Client createHTTPClient() {	
+	public static Client createHTTPClient() 
+	{	
 		Client client = Client.create();
 		
-		client.addFilter(new ClientFilter() {
+		client.addFilter(new ClientFilter()
+		{
 		    private ArrayList<Object> cookies;
 
 		    @Override
-		    public ClientResponse handle(ClientRequest request) throws ClientHandlerException {
-		        if (cookies != null) {
+		    public ClientResponse handle(ClientRequest request) throws ClientHandlerException 
+		    {
+		        if (cookies != null)
 		            request.getHeaders().put("Cookie", cookies);
-		        }
+		        
 		        ClientResponse response = getNext().handle(request);
+		        
 		        // copy cookies
-		        if (response.getCookies() != null) {
+		        if (response.getCookies() != null) 
+		        {
 		            if (cookies == null) {
 		                cookies = new ArrayList<Object>();
 		            }

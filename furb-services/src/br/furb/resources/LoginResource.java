@@ -28,20 +28,30 @@ public class LoginResource
 	 */	
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	public String login(@HeaderParam("username") String user, @HeaderParam("password") String password) throws JSONException 
+	public String login(@HeaderParam("username") String username, @HeaderParam("password") String password) throws JSONException 
 	{
-		Client client = ClientFactory.createHTTPClient();		
-		TokensController controller = TokensController.getInstance();
-		try 
+		try
 		{
-            FurbLogonClient furbClient = new FurbLogonClient(client, user, password);
-            furbClient.logon();
+			boolean testMode = username.equalsIgnoreCase("test") && password.equalsIgnoreCase("test");
+			
+			TokensController controller = TokensController.getInstance();
+			
+			Client client = null;
+			if (!testMode)
+			{
+				client = ClientFactory.createHTTPClient();
+			
+	            FurbLogonClient furbClient = new FurbLogonClient(client, username, password);
+	            furbClient.logon();
+			}
 				
-            TokenLogin token = controller.generateToken(user, password, client);
+            TokenLogin token = controller.generateToken(username, password, client);
 			
 			JSONObject json = new JSONObject();
 			json.put("username", token.getUser());
 			json.put("token", token.getToken());
+			json.put("testmode", testMode);
+			
 			return json.toString();
 		} 
 		catch (Exception e)
