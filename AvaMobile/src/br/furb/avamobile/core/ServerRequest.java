@@ -68,7 +68,7 @@ public class ServerRequest extends AsyncTask<NameValuePair, String, HttpResponse
 		try
 		{
 			if (result == null)
-				throw new Exception("Falha no servidor");
+				throw new Exception("Sem comunicação com o servidor");
 			
 			StatusLine statusLine = result.getStatusLine();
 			

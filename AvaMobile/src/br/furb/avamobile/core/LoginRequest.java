@@ -16,10 +16,11 @@ public class LoginRequest implements ServerRequestListener
 	ProgressDialog progress;	
 	LoginListener listener;
 	
-	public LoginRequest(Context context, LoginListener listener)
+	private LoginRequest(Context context, LoginListener listener)
 	{
 		this.listener = listener;
 		this.context = context;
+		
 		this.progress = new ProgressDialog(context);
 		this.progress.setIndeterminate(true);
 		this.progress.setCancelable(false);
@@ -30,7 +31,7 @@ public class LoginRequest implements ServerRequestListener
 	public void login(String username, String password)
 	{
 		NameValuePair kpUsername = new BasicNameValuePair("username", username);
-		NameValuePair kpPassword = new BasicNameValuePair("password", password);		
+		NameValuePair kpPassword = new BasicNameValuePair("password", password);	
 		try
 		{
 			ServerRequest loginTask = new ServerRequest(context, LOGIN_URL, this);		
