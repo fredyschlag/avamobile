@@ -11,6 +11,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 import br.furb.avamobile.R;
@@ -25,6 +26,7 @@ public class MainActivity extends Activity implements ServerRequestListener
 	
 	EditText edtUsername;
 	EditText edtPassword;
+	CheckBox chkLembrarSenha;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) 
@@ -34,6 +36,7 @@ public class MainActivity extends Activity implements ServerRequestListener
 		
 		edtUsername = (EditText) findViewById(R.id.editNome);
 		edtPassword = (EditText) findViewById(R.id.editSenha);
+		chkLembrarSenha = (CheckBox) findViewById(R.id.ckbRemeberPassword);
 	}
 	
 	@Override
@@ -48,7 +51,10 @@ public class MainActivity extends Activity implements ServerRequestListener
 		else
 			edtUsername.setText("");
 		
-		edtPassword.setText("");
+		if (preferences.contains("password"))
+			edtPassword.setText(preferences.getString("password", ""));
+		else
+			edtPassword.setText("");
 	}
 	
 	public void loginClick(View view)
@@ -58,7 +64,7 @@ public class MainActivity extends Activity implements ServerRequestListener
 		
 		if (usernameStr.equalsIgnoreCase("teste") && passwordStr.equalsIgnoreCase("teste"))
 		{
-			startMenuActivity("");
+			startMenuActivity("TESTE");
 		}
 		else
 		{
@@ -74,10 +80,15 @@ public class MainActivity extends Activity implements ServerRequestListener
 	{
 		String username = edtUsername.getText().toString();
 		
+		String password = "";
+		if (chkLembrarSenha.isChecked())
+			password = edtPassword.getText().toString();
+		
 		SharedPreferences preferences = getSharedPreferences("login", MODE_PRIVATE);
 		SharedPreferences.Editor editor = preferences.edit();
 	
 		editor.putString("username", username);
+		editor.putString("password", password);
 		
 		editor.commit();
 		
@@ -118,9 +129,7 @@ public class MainActivity extends Activity implements ServerRequestListener
 					String token = json.getString("token");
 					
 					if (!token.equals(""))
-		    		{
 						startMenuActivity(token);
-		    		}
 				}
 			}
 			catch (JSONException e) 

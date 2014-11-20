@@ -33,6 +33,7 @@ public final class R {
     public static final class id {
         public static final int bottomSeparator=0x7f080002;
         public static final int btnConsultarFinanceiro=0x7f080008;
+        public static final int btnFinalizaSessao=0x7f08000b;
         public static final int ckbRemeberPassword=0x7f080007;
         public static final int editNome=0x7f080004;
         public static final int editSenha=0x7f080006;
@@ -55,6 +56,7 @@ public final class R {
         public static final int acessar=0x7f050009;
         public static final int app_name=0x7f050000;
         public static final int consultar_financeiro=0x7f050007;
+        public static final int finalizar_sessao=0x7f05000b;
         public static final int lb_username=0x7f050006;
         public static final int lembrar_senha=0x7f05000a;
         public static final int login=0x7f050004;

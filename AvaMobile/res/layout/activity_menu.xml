@@ -38,4 +38,16 @@
         android:text="@string/consultar_financeiro"
         android:textColor="@android:color/white" />
 
+    <Button
+        android:id="@+id/btnFinalizaSessao"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/btnConsultarFinanceiro"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentStart="true"
+        android:background="@drawable/button_shape"
+        android:text="@string/finalizar_sessao"
+        android:textColor="@android:color/white" />
+
 </RelativeLayout>

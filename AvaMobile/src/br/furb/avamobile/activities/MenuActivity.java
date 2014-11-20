@@ -12,7 +12,8 @@ public class MenuActivity extends Activity
 {
 	String token;
 	
-	Button btnConsultaFinanceiro;	
+	Button btnConsultaFinanceiro;
+	Button btnFinalizaSessao;
 	
 	TextView txtUsername;
 	
@@ -43,6 +44,23 @@ public class MenuActivity extends Activity
 	    			
 	    	    	//startActivity(i);
 	    		}
+			}
+		});
+		
+		btnFinalizaSessao = (Button) findViewById(R.id.btnFinalizaSessao);
+		btnFinalizaSessao.setOnClickListener(new OnClickListener()
+		{
+			@Override
+			public void onClick(View view)
+			{
+				if (!token.equals(""))
+	    		{
+	    			// TODO: Informar o web-service sobre o fim da sessão
+	    		}
+				
+				token = "";
+				
+				finish();
 			}
 		});
 	}
