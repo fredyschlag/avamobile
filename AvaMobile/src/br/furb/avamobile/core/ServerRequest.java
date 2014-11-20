@@ -12,7 +12,6 @@ import org.apache.http.protocol.BasicHttpContext;
 import org.apache.http.protocol.HttpContext;
 import org.apache.http.util.EntityUtils;
 
-import android.app.Activity;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -22,9 +21,9 @@ public class ServerRequest extends AsyncTask<NameValuePair, String, HttpResponse
 {
 	private String url;
 	private ServerRequestListener listener;
-	private Activity context; 
+	private Context context; 
 	
-	public ServerRequest(Activity context, String url, ServerRequestListener listener)
+	public ServerRequest(Context context, String url, ServerRequestListener listener)
 	{
 		this.context = context;
 		this.url = url;
@@ -59,7 +58,7 @@ public class ServerRequest extends AsyncTask<NameValuePair, String, HttpResponse
 		else
 		{
 			this.cancel(true);
-			listener.onRequestComplete("No internet connection", true);
+			listener.onRequestComplete("Sem conexão com a internet", true);
 		}
 	}
 	
@@ -69,12 +68,12 @@ public class ServerRequest extends AsyncTask<NameValuePair, String, HttpResponse
 		try
 		{
 			if (result == null)
-				throw new Exception("Bad communication with web-service");
+				throw new Exception("Falha no servidor");
 			
 			StatusLine statusLine = result.getStatusLine();
 			
 			if (statusLine.getStatusCode() != HttpURLConnection.HTTP_OK)
-				throw new Exception("Request error: Status code = " + statusLine.getStatusCode());
+				throw new Exception("Erro na requisição: Código do erro = " + statusLine.getStatusCode());
 			
 			String jsonString = EntityUtils.toString(result.getEntity());
 			

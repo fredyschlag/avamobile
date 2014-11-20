@@ -1,12 +1,6 @@
 package br.furb.avamobile.activities;
 
-import org.apache.http.NameValuePair;
-import org.apache.http.message.BasicNameValuePair;
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import android.app.Activity;
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -15,21 +9,17 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 import br.furb.avamobile.R;
-import br.furb.avamobile.core.ServerRequest;
-import br.furb.avamobile.core.ServerRequest.ServerRequestListener;
+import br.furb.avamobile.core.LoginRequest;
+import br.furb.avamobile.core.LoginRequest.LoginListener;
 
-public class MainActivity extends Activity implements ServerRequestListener
+public class MainActivity extends Activity
 {	
-	final String LOGIN_URL = "http://192.168.56.1:8080/furb-services/login";
-	
-	ProgressDialog progress;
-	
 	EditText edtUsername;
 	EditText edtPassword;
 	CheckBox chkLembrarSenha;
 	
 	@Override
-	protected void onCreate(Bundle savedInstanceState) 
+	protected void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
@@ -68,11 +58,22 @@ public class MainActivity extends Activity implements ServerRequestListener
 		}
 		else
 		{
-			NameValuePair username = new BasicNameValuePair("username", usernameStr);
-			NameValuePair password = new BasicNameValuePair("password", passwordStr);
+			LoginListener loginListener = new LoginListener()
+			{
+				@Override
+				public void sucess(String token)
+				{
+					startMenuActivity(token);
+				}
+				
+				@Override
+				public void error(String error)
+				{
+					Toast.makeText(MainActivity.this, error, Toast.LENGTH_LONG).show();
+				}
+			};
 			
-			ServerRequest loginTask = new ServerRequest(this, LOGIN_URL, this);
-			loginTask.execute(username, password);
+			LoginRequest.login(this, loginListener, usernameStr, passwordStr);
 		}
 	}
 	
@@ -98,47 +99,5 @@ public class MainActivity extends Activity implements ServerRequestListener
 		i.putExtra("token", token);
 		
     	startActivity(i);
-	}
-
-	@Override
-	public void onRequestStart()
-	{
-		progress = ProgressDialog.show(this, "Aguarde", "processando..", true, false);
-		progress.setCancelable(false);
-	}
-
-	@Override
-	public void onRequestComplete(String response, boolean error)
-	{
-		progress.dismiss();
-		
-		if (!error)
-		{
-			try 
-			{
-				JSONObject json = new JSONObject(response);
-				
-				if ((!error) && (json.has("error")))
-				{
-					error = true;
-					response = json.getString("error");
-				}
-				
-				if (!error)
-				{
-					String token = json.getString("token");
-					
-					if (!token.equals(""))
-						startMenuActivity(token);
-				}
-			}
-			catch (JSONException e) 
-			{
-				error = true;
-				response = e.getMessage();
-			}
-		}
-		
-		if (error) Toast.makeText(this, response, Toast.LENGTH_LONG).show();
 	}
 }
