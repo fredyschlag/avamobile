@@ -33,6 +33,11 @@
             android:name="br.furb.avamobile.activities.MenuActivity"
             android:label="@string/title_activity_menu" >
         </activity>
+        <activity 
+            android:name="br.furb.avamobile.activities.FinanceiroActivity"
+            android:label="@string/financeiro">
+            
+        </activity>
     </application>
 
 </manifest>
