@@ -15,7 +15,7 @@ public class FurbLogonClient {
 		this.client = client;
 		this.user = user;
 		this.password = password;
-	}
+	}	
 	
 	public void logon() {
 		WebResource webResource = client.resource("https://www.furb.br/academico/servicosAcademicos");
@@ -25,11 +25,26 @@ public class FurbLogonClient {
 		webResource = client.resource("https://www.furb.br/academico/validaLogon");		
 		Form form = new Form();
 		form.putSingle("nm_login", user);
-		form.putSingle("ds_senha", password);
-		//form.putSingle("nome_servlet", "/academico/uFinanca");		
+		form.putSingle("ds_senha", password);		
 		response = webResource.type("application/x-www-form-urlencoded").post(ClientResponse.class, form);
 		ClientUtils.logResponse(response);
-		//TODO se ocorreu falha, lançar exceção
+	}
+	
+	public boolean validate() {
+		WebResource webResource = client.resource("https://www.furb.br/academico/servicosAcademicos");
+		ClientResponse response = webResource.get(ClientResponse.class);
+		String responseStr = ClientUtils.logResponse(response);
+		return responseStr.contains("Informe o seu nome de usuário.");		
+	}
+	
+	public void logout() {
+		WebResource webResource = client.resource("https://www.furb.br/academico/servicosAcademicos");
+		ClientResponse response = webResource.get(ClientResponse.class);
+		ClientUtils.logResponse(response);		
+		
+		webResource = client.resource("https://www.furb.br/academico/encerraSessao");		
+		response = webResource.get(ClientResponse.class);
+		ClientUtils.logResponse(response);				
 	}
 
 }

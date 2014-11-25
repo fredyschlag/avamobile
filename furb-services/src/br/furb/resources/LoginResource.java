@@ -61,4 +61,34 @@ public class LoginResource
 			return json.toString();
 		}
 	}	
+	
+	@Path("/validate")
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	public String validate(@HeaderParam("token") String token) throws JSONException 
+	{
+		try
+		{		
+			TokensController controller = TokensController.getInstance();
+			TokenLogin login = controller.getToken(token);
+			boolean valid = false;
+			if (login != null) {
+				FurbLogonClient furbClient = new FurbLogonClient(login.getClient(), login.getUser(), login.getPassword());
+	            valid = furbClient.validate();
+			}			
+			
+			JSONObject json = new JSONObject();
+			json.put("valid", valid);			
+			return json.toString();
+		} 
+		catch (Exception e)
+		{
+			JSONObject json = new JSONObject();
+			json.put("valid", false);
+			json.put("error", e.getMessage());
+			return json.toString();
+		}	
+	}
+	
+	
 }
