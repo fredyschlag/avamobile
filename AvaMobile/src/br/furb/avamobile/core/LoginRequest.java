@@ -10,7 +10,7 @@ import br.furb.avamobile.core.ServerRequest.ServerRequestListener;
 
 public class LoginRequest implements ServerRequestListener
 {
-	final String LOGIN_URL = "http://192.168.56.1:8080/furb-services/login";
+	final String LOGIN_URL = ServerUtils.SERVER_URL + "login";
 	
 	Context context;
 	ProgressDialog progress;	
