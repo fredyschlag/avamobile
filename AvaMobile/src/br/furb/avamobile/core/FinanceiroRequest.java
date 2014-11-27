@@ -8,7 +8,8 @@ import br.furb.avamobile.core.ServerRequest.ServerRequestListener;
 
 public class FinanceiroRequest implements ServerRequestListener
 {
-	final String FINANCEIRO_URL = "http://192.168.56.1:8080/furb-services/financial";
+	
+	final String FINANCEIRO_URL = ServerUtils.SERVER_URL + "financial";
 	
 	Context context;
 	ProgressDialog progress;	

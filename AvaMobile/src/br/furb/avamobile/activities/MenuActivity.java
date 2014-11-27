@@ -1,12 +1,14 @@
 package br.furb.avamobile.activities;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
 import br.furb.avamobile.R;
+import br.furb.avamobile.core.ServerMethods;
 
 public class MenuActivity extends Activity
 {
@@ -34,15 +36,11 @@ public class MenuActivity extends Activity
 				// TODO Gielez: Aqui deve ser aberta a interface com a listagem do financeiro
 				
 				if (!token.equals(""))
-	    		{
-	    			//TextView txtUsername = (TextView) findViewById(R.id.txtUsername);
-	    			
-	    			//Intent i = new Intent(MenuActivity.this, FinanceiroActivity.class);
-	    	    	
-	    			//i.putExtra("username", txtUsername.getText().toString());
-	    			//i.putExtra("token", Integer.toString(token));
-	    			
-	    	    	//startActivity(i);
+	    		{	    			
+					Intent i = new Intent(MenuActivity.this, FinanceiroActivity.class);
+					//TODO Alterar a linha abaixo para pegar os dados financeiros do usuário logado
+	    			i.putExtra("dados", ServerMethods.retornarDadosFinanceiros());	    			
+	    	    	startActivity(i);
 	    		}
 			}
 		});
