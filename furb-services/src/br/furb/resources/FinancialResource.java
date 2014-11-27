@@ -7,6 +7,7 @@ import javax.ws.rs.GET;
 import javax.ws.rs.HeaderParam;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
@@ -37,6 +38,17 @@ public class FinancialResource {
 		TokenLogin tokenLogin = TokensController.getInstance().getToken(token);
 		FinancialClient client = new FinancialClient(tokenLogin.getClient());
 		return client.listLinks();
+	}
+	
+	@Path("/items/{link}")
+	@POST
+	@Produces(MediaType.APPLICATION_JSON)
+	public List<FinancialItem> getFinancialItems(@PathParam(value = "link") int link, @HeaderParam("token") String token) throws ParseException 
+	{
+		TokenLogin tokenLogin = TokensController.getInstance().getToken(token);		
+		FinancialClient client = new FinancialClient(tokenLogin.getClient());
+		List<Link> links = client.listLinks();		
+		return client.listItems(links.get(link));
 	}
 	
 

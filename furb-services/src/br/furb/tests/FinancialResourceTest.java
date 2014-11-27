@@ -39,7 +39,7 @@ public class FinancialResourceTest {
 		WebResource webResource = client
 				.resource("http://localhost:8080/furb-services/login");
 		ClientResponse response = webResource.accept("application/json")
-				.header("user", args[0]).header("password", args[1])
+				.header("username", args[0]).header("password", args[1])
 				.get(ClientResponse.class);
 		String json = response.getEntity(String.class);
 		JSONObject object = new JSONObject(json);
@@ -62,6 +62,10 @@ public class FinancialResourceTest {
 		json = response.getEntity(String.class);
 		array = new JSONArray(json);
 		
+		webResource = client.resource("http://localhost:8080/furb-services/financial/items/0");
+		response = webResource.accept("application/json").header("token", token).post(ClientResponse.class, link);
+		json = response.getEntity(String.class);
+		array = new JSONArray(json);		
 	}
 
 }

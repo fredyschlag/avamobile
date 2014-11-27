@@ -62,12 +62,17 @@ public class FinancialUtils {
 	}
 
 	private static Date getDateValue(Elements elements, int index) throws ParseException {
-		String value = getStringValue(elements, index);
-		if (value.isEmpty()) {
+		try {
+			String value = getStringValue(elements, index);
+			if (value.isEmpty()) {
+				return null;
+			}
+			
+			return dateFormat.parse(value);
+		} catch (Exception e) {
+			e.printStackTrace();
 			return null;
 		}
-		
-		return dateFormat.parse(value);
 	}
 
 	public static List<FinancialItem> parseItems(Document document)
