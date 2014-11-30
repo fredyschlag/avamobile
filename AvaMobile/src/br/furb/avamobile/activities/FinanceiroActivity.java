@@ -8,13 +8,16 @@ import android.os.Bundle;
 import android.widget.ExpandableListView;
 import br.furb.avamobile.R;
 
-public class FinanceiroActivity extends Activity {
+public class FinanceiroActivity extends Activity 
+{
     private static List<DadosFinanceiros> dados;
     private ExpandableListView expandableListView;
     private Adapter adapter;
 
+	@SuppressWarnings("unchecked")
 	@Override
-    public void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState)
+	{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_financeiro);
         

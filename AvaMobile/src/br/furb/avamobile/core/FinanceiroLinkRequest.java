@@ -12,17 +12,17 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import br.furb.avamobile.core.ServerRequest.ServerRequestListener;
 
-public class FinanceiroRequest implements ServerRequestListener
+public class FinanceiroLinkRequest implements ServerRequestListener
 {	
 	final String FINANCEIRO_LINKS_URL = ServerUtils.SERVER_URL + "financial/links";
-	final String FINANCEIRO_ITENS_URL = ServerUtils.SERVER_URL +  "financial/items";
 	
 	Context context;
 	ProgressDialog progress;	
-	FinanceiroListener listener;
+	FinanceiroLinkListener listener;
 	
-	public FinanceiroRequest(Context context)
+	public FinanceiroLinkRequest(Context context, FinanceiroLinkListener listener)
 	{
+		this.listener = listener;
 		this.context = context;
 		this.progress = new ProgressDialog(context);
 		this.progress.setIndeterminate(true);
@@ -31,7 +31,7 @@ public class FinanceiroRequest implements ServerRequestListener
 		this.progress.setMessage("Processando...");
 	}
 	
-	public void links(String token)
+	public void execute(String token)
 	{
 		NameValuePair kpToken = new BasicNameValuePair("token", token);	
 		try
@@ -59,11 +59,18 @@ public class FinanceiroRequest implements ServerRequestListener
 		if (!error)
 		{
 			try
-			{	
-				JSONObject json = new JSONObject(response);
-				
-				if ((!error) && (json.has("error")))
-					throw new Exception(json.getString("error"));
+			{				
+				try
+				{
+					JSONObject json = new JSONObject(response);
+					
+					if ((!error) && (json.has("error")))
+						throw new Exception(json.getString("error"));
+				}
+				catch (Exception ex)
+				{
+					// Se houver erro é porque é um JSONArray e nao é erro.
+				}
 				
 				JSONArray jsonLinks = new JSONArray(response);
 				
@@ -94,7 +101,7 @@ public class FinanceiroRequest implements ServerRequestListener
 		if (error) listener.error(response);
 	}
 	
-	public interface FinanceiroListener
+	public interface FinanceiroLinkListener
 	{
 		void sucess(List<FinanceiroLink> links);
 		void error(String error);

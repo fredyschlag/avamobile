@@ -1,21 +1,29 @@
 package br.furb.avamobile.core;
 
-public class FinanceiroData {
-	private String dataVencimento;
+import java.util.Date;
+
+public class FinanceiroData
+{
+	private Date dataVencimento;
 	private String convenio;
-	private float valorBruto;
-	private float abatimento;
-	private float deducoes;
-	private float acrescimos;
-	private float multa;
-	private String dataPagamento;
-	private float valorPago;
+	private double valorBruto;
+	private double abatimento;
+	private double deducoes;
+	private double acrescimos;
+	private double multa;
+	private Date dataPagamento;
+	private double valorPago;
 	
-	
-	
-	public FinanceiroData(String dataVencimento, String convenio,
-			float valorBruto, float abatimento, float deducoes,
-			float acrescimos, float multa, String dataPagamento, float valorPago) {
+	public FinanceiroData()
+	{
+		// Construtor vazio
+	}
+
+	public FinanceiroData(Date dataVencimento, String convenio,
+			double valorBruto, double abatimento, double deducoes,
+			double acrescimos, double multa, Date dataPagamento, 
+			double valorPago)
+	{
 		this.dataVencimento = dataVencimento;
 		this.convenio = convenio;
 		this.valorBruto = valorBruto;
@@ -26,62 +34,95 @@ public class FinanceiroData {
 		this.dataPagamento = dataPagamento;
 		this.valorPago = valorPago;
 	}
-	
-	public float getValorPago() {
+
+	public double getValorPago()
+	{
 		return valorPago;
 	}
-	public void setValorPago(float valorPago) {
+
+	public void setValorPago(double valorPago)
+	{
 		this.valorPago = valorPago;
 	}
-	public String getDataVencimento() {
+
+	public Date getDataVencimento()
+	{
 		return dataVencimento;
 	}
-	public void setDataVencimento(String dataVencimento) {
+
+	public void setDataVencimento(Date dataVencimento)
+	{
 		this.dataVencimento = dataVencimento;
 	}
-	public String getConvenio() {
+
+	public String getConvenio()
+	{
 		return convenio;
 	}
-	public void setConvenio(String convenio) {
+
+	public void setConvenio(String convenio)
+	{
 		this.convenio = convenio;
 	}
-	public float getValorBruto() {
+
+	public double getValorBruto()
+	{
 		return valorBruto;
 	}
-	public void setValorBruto(float valorBruto) {
+
+	public void setValorBruto(double valorBruto)
+	{
 		this.valorBruto = valorBruto;
 	}
-	public float getAbatimento() {
+
+	public double getAbatimento()
+	{
 		return abatimento;
 	}
-	public void setAbatimento(float abatimento) {
+
+	public void setAbatimento(double abatimento)
+	{
 		this.abatimento = abatimento;
 	}
-	public float getDeducoes() {
+
+	public double getDeducoes()
+	{
 		return deducoes;
 	}
-	public void setDeducoes(float deducoes) {
+
+	public void setDeducoes(double deducoes)
+	{
 		this.deducoes = deducoes;
 	}
-	public float getAcrescimos() {
+
+	public double getAcrescimos()
+	{
 		return acrescimos;
 	}
-	public void setAcrescimos(float acrescimos) {
+
+	public void setAcrescimos(double acrescimos)
+	{
 		this.acrescimos = acrescimos;
 	}
-	public float getMulta() {
+
+	public double getMulta()
+	{
 		return multa;
 	}
-	public void setMulta(float multa) {
+
+	public void setMulta(double multa)
+	{
 		this.multa = multa;
 	}
-	public String getDataPagamento() {
+
+	public Date getDataPagamento()
+	{
 		return dataPagamento;
 	}
-	public void setDataPagamento(String dataPagamento) {
+
+	public void setDataPagamento(Date dataPagamento)
+	{
 		this.dataPagamento = dataPagamento;
 	}
-	
-	
 
 }

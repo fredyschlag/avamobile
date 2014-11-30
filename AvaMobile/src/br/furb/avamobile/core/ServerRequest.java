@@ -9,6 +9,7 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.protocol.BasicHttpContext;
+import org.apache.http.protocol.HTTP;
 import org.apache.http.protocol.HttpContext;
 import org.apache.http.util.EntityUtils;
 
@@ -75,7 +76,7 @@ public class ServerRequest extends AsyncTask<NameValuePair, String, HttpResponse
 			if (statusLine.getStatusCode() != HttpURLConnection.HTTP_OK)
 				throw new Exception("Erro na requisição: Código do erro = " + statusLine.getStatusCode());
 			
-			String jsonString = EntityUtils.toString(result.getEntity());
+			String jsonString = EntityUtils.toString(result.getEntity(), HTTP.UTF_8);
 			
 			listener.onRequestComplete(jsonString, false);
 		}

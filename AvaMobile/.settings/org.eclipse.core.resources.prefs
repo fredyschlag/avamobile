@@ -1,5 +1,9 @@
 eclipse.preferences.version=1
+encoding//src/br/furb/avamobile/activities/Adapter.java=UTF-8
 encoding//src/br/furb/avamobile/activities/MainActivity.java=UTF-8
 encoding//src/br/furb/avamobile/activities/MenuActivity.java=UTF-8
+encoding//src/br/furb/avamobile/core/FinanceiroDataRequest.java=UTF-8
+encoding//src/br/furb/avamobile/core/FinanceiroLinkRequest.java=UTF-8
 encoding//src/br/furb/avamobile/core/LoginRequest.java=UTF-8
+encoding//src/br/furb/avamobile/core/ServerMethods.java=UTF-8
 encoding//src/br/furb/avamobile/core/ServerRequest.java=UTF-8
