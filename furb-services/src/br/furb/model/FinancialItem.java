@@ -6,24 +6,27 @@ import java.util.List;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
-public class FinancialItem {
+public class FinancialItem
+{
 
 	private Date dueDate; // Data de vencimento
-	private String convenant; // Convênio
+	private String convenant; // ConvÃªnio
 	private double grossValue; // Valor bruto
 	private double discount; // Abatimento/Desconto
-	private double deductions; // Deduções
-	private double increase; // Acréscimo
+	private double deductions; // DeduÃ§Ãµes
+	private double increase; // AcrÃ©scimo
 	private double fine; // Multa
 	private Date datePayment; // Data de pagamento
 	private double amountPaid; // Valor pago
 	private String detailsId;
 
-	public String getDetailsId() {
+	public String getDetailsId()
+	{
 		return detailsId;
 	}
 
-	public void setDetailsId(String detailsId) {
+	public void setDetailsId(String detailsId)
+	{
 		this.detailsId = detailsId;
 	}
 
@@ -38,33 +41,35 @@ public class FinancialItem {
 	 * 
 	 * @return Data de vencimento
 	 */
-	public Date getDueDate() {
+	public Date getDueDate()
+	{
 		return dueDate;
 	}
 
 	/**
 	 * 
-	 * @param dueDate
-	 *            Data de vencimento
+	 * @param dueDate Data de vencimento
 	 */
-	public void setDueDate(Date dueDate) {
+	public void setDueDate(Date dueDate)
+	{
 		this.dueDate = dueDate;
 	}
 
 	/**
 	 * 
-	 * @return Convênio
+	 * @return ConvÃªnio
 	 */
-	public String getConvenant() {
+	public String getConvenant()
+	{
 		return convenant;
 	}
 
 	/**
 	 * 
-	 * @param convenant
-	 *            Convênio
+	 * @param convenant ConvÃªnio
 	 */
-	public void setConvenant(String convenant) {
+	public void setConvenant(String convenant)
+	{
 		this.convenant = convenant;
 	}
 
@@ -72,16 +77,17 @@ public class FinancialItem {
 	 * 
 	 * @return Valor bruto
 	 */
-	public double getGrossValue() {
+	public double getGrossValue()
+	{
 		return grossValue;
 	}
 
 	/**
 	 * 
-	 * @param grossValue
-	 *            Valor bruto
+	 * @param grossValue Valor bruto
 	 */
-	public void setGrossValue(double grossValue) {
+	public void setGrossValue(double grossValue)
+	{
 		this.grossValue = grossValue;
 	}
 
@@ -89,50 +95,53 @@ public class FinancialItem {
 	 * 
 	 * @return Abatimento/Desconto
 	 */
-	public double getDiscount() {
+	public double getDiscount()
+	{
 		return discount;
 	}
 
 	/**
 	 * 
-	 * @param discount
-	 *            Abatimento/Desconto
+	 * @param discount Abatimento/Desconto
 	 */
-	public void setDiscount(double discount) {
+	public void setDiscount(double discount)
+	{
 		this.discount = discount;
 	}
 
 	/**
 	 * 
-	 * @return Deduções
+	 * @return DeduÃ§Ãµes
 	 */
-	public double getDeductions() {
+	public double getDeductions()
+	{
 		return deductions;
 	}
 
 	/**
 	 * 
-	 * @param deductions
-	 *            Deduções
+	 * @param deductions DeduÃ§Ãµes
 	 */
-	public void setDeductions(double deductions) {
+	public void setDeductions(double deductions)
+	{
 		this.deductions = deductions;
 	}
 
 	/**
 	 * 
-	 * @return Acréscimo
+	 * @return AcrÃ©scimo
 	 */
-	public double getIncrease() {
+	public double getIncrease()
+	{
 		return increase;
 	}
 
 	/**
 	 * 
-	 * @param increase
-	 *            Acréscimo
+	 * @param increase AcrÃ©scimo
 	 */
-	public void setIncrease(double increase) {
+	public void setIncrease(double increase)
+	{
 		this.increase = increase;
 	}
 
@@ -140,16 +149,17 @@ public class FinancialItem {
 	 * 
 	 * @return Multa
 	 */
-	public double getFine() {
+	public double getFine()
+	{
 		return fine;
 	}
 
 	/**
 	 * 
-	 * @param fine
-	 *            Multa
+	 * @param fine Multa
 	 */
-	public void setFine(double fine) {
+	public void setFine(double fine)
+	{
 		this.fine = fine;
 	}
 
@@ -157,16 +167,17 @@ public class FinancialItem {
 	 * 
 	 * @return Data do pagamento
 	 */
-	public Date getDatePayment() {
+	public Date getDatePayment()
+	{
 		return datePayment;
 	}
 
 	/**
 	 * 
-	 * @param datePayment
-	 *            Data do pagamento
+	 * @param datePayment Data do pagamento
 	 */
-	public void setDatePayment(Date datePayment) {
+	public void setDatePayment(Date datePayment)
+	{
 		this.datePayment = datePayment;
 	}
 
@@ -174,16 +185,17 @@ public class FinancialItem {
 	 * 
 	 * @return Valor pago
 	 */
-	public double getAmountPaid() {
+	public double getAmountPaid()
+	{
 		return amountPaid;
 	}
 
 	/**
 	 * 
-	 * @param amountPaid
-	 *            Valor pago
+	 * @param amountPaid Valor pago
 	 */
-	public void setAmountPaid(double amountPaid) {
+	public void setAmountPaid(double amountPaid)
+	{
 		this.amountPaid = amountPaid;
 	}
 
@@ -191,16 +203,17 @@ public class FinancialItem {
 	 * 
 	 * @return Detalhes {@link DetailsFinancialItem}
 	 */
-	public List<DetailsFinancialItem> getDetails() {
+	public List<DetailsFinancialItem> getDetails()
+	{
 		return details;
 	}
 
 	/**
 	 * 
-	 * @param details
-	 *            Detalhes {@link DetailsFinancialItem}
+	 * @param details Detalhes {@link DetailsFinancialItem}
 	 */
-	public void setDetails(List<DetailsFinancialItem> details) {
+	public void setDetails(List<DetailsFinancialItem> details)
+	{
 		this.details = details;
 	}
 

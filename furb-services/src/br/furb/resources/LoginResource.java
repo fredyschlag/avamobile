@@ -78,7 +78,7 @@ public class LoginResource
 			}			
 			
 			JSONObject json = new JSONObject();
-			json.put("valid", valid);			
+			json.put("valid", valid);
 			return json.toString();
 		} 
 		catch (Exception e)

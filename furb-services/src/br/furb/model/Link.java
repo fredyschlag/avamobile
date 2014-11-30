@@ -3,43 +3,66 @@ package br.furb.model;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
-public class Link {
-	
+public class Link
+{
+
 	private String id;
 	private String name;
 	private String course;
 	private String description;
-	
-	public void setId(String id) {
+
+	public void setId(String id)
+	{
 		this.id = id;
 	}
 
-	public String getName() {
+	public String getName()
+	{
 		return name;
 	}
 
-	public void setName(String name) {
+	public void setName(String name)
+	{
 		this.name = name;
 	}
 
-	public String getCourse() {
+	public String getCourse()
+	{
 		return course;
 	}
 
-	public void setCourse(String course) {
+	public void setCourse(String course)
+	{
 		this.course = course;
 	}
 
-	public void setDescription(String description) {
+	public void setDescription(String description)
+	{
 		this.description = description;
 	}
 
-	public String getId() {
+	public String getId()
+	{
 		return id;
 	}
 
-	public String getDescription() {
+	public String getDescription()
+	{
 		return description;
+	}
+	
+	@Override
+	public boolean equals(Object obj)
+	{			
+		if (obj == null)
+			return false;
+		
+		if (!(obj instanceof Link))
+			return false;
+			
+		Link l = (Link)obj;
+		
+		return this.id.equals(l.getId());
 	}
 
 }

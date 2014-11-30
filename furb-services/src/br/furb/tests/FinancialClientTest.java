@@ -14,14 +14,14 @@ import com.sun.jersey.api.client.Client;
 
 public class FinancialClientTest {
 	
-	public static void main(String[] args) throws IOException, ParseException {		
+	public static void main(String[] args) throws IOException, ParseException {	
 		Client client = ClientFactory.createHTTPClient();
 		FurbLogonClient logon = new FurbLogonClient(client, args[0], args[1]);
 		logon.logon();
 		FinancialClient financial = new FinancialClient(client);
 		List<Link> links = financial.listLinks();
 		Link link = links.get(0);
-		List<FinancialItem> financialItems = financial.listItems(link);				
+		List<FinancialItem> financialItems = financial.listItems(link);	
 		financial.listDetails(link, financialItems.get(0));
 	}
 

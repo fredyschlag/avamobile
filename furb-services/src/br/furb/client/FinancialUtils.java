@@ -18,13 +18,16 @@ import br.furb.model.DetailsFinancialItem;
 import br.furb.model.FinancialItem;
 import br.furb.model.Link;
 
-public class FinancialUtils {
+public class FinancialUtils
+{
 
-	private static Elements getElements(Document document, String name) {
+	private static Elements getElements(Document document, String name)
+	{
 		return document.getElementsByAttributeValue("NAME", name);
 	}
 
-	public static List<Link> parseLinks(Document document) {
+	public static List<Link> parseLinks(Document document)
+	{
 		Elements links = getElements(document, "vinculo");
 		Elements names = getElements(document, "nome");
 		Elements courses = getElements(document, "curso");
@@ -32,7 +35,8 @@ public class FinancialUtils {
 
 		List<Link> linkList = new ArrayList<Link>();
 
-		for (int i = 0; i < links.size(); i++) {
+		for (int i = 0; i < links.size(); i++)
+		{
 			Link link = new Link();
 			link.setId(links.get(i).val());
 			link.setName(names.get(i).val());
@@ -44,46 +48,54 @@ public class FinancialUtils {
 		return linkList;
 	}
 
-	public static List<Link> parseLinks(String html) {
+	public static List<Link> parseLinks(String html)
+	{
 		Document document = Jsoup.parse(html);
 		return parseLinks(document);
 	}
 
-	private static String getStringValue(Elements elements, int index) {
+	private static String getStringValue(Elements elements, int index)
+	{
 		return elements.get(index).html();
 	}
-	
+
 	private static SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 	private static NumberFormat decimalFormat = DecimalFormat.getInstance(new Locale("pt", "BR"));
 
-	private static double getDoubleValue(Elements elements, int index) throws ParseException {
+	private static double getDoubleValue(Elements elements, int index) throws ParseException
+	{
 		String value = getStringValue(elements, index);
 		return decimalFormat.parse(value).doubleValue();
 	}
 
-	private static Date getDateValue(Elements elements, int index) throws ParseException {
-		try {
+	private static Date getDateValue(Elements elements, int index) throws ParseException
+	{
+		try
+		{
 			String value = getStringValue(elements, index);
-			if (value.isEmpty()) {
+			if (value.isEmpty())
+			{
 				return null;
 			}
-			
+
 			return dateFormat.parse(value);
-		} catch (Exception e) {
+		} 
+		catch (Exception e)
+		{
 			e.printStackTrace();
 			return null;
 		}
 	}
 
-	public static List<FinancialItem> parseItems(Document document)
-			throws ParseException {
-		Elements tables = document.getElementsByAttributeValue("class",
-				"bodyTable");
+	public static List<FinancialItem> parseItems(Document document) throws ParseException
+	{
+		Elements tables = document.getElementsByAttributeValue("class",	"bodyTable");
 		Element table = tables.get(1);
 		Elements rows = table.getElementsByTag("tr");
 		List<FinancialItem> list = new ArrayList<>();
 
-		for (int i = 1; i < rows.size(); i++) {
+		for (int i = 1; i < rows.size(); i++)
+		{
 			Element row = rows.get(i);
 			Elements cols = row.getElementsByTag("td");
 			FinancialItem item = new FinancialItem();
@@ -97,28 +109,33 @@ public class FinancialUtils {
 			item.setDatePayment(getDateValue(cols, 7));
 			item.setAmountPaid(getDoubleValue(cols, 8));
 			/*
-			 * Faz o parser do link 
-			 * Exemplo: &nbsp;&nbsp;<a href='/academico/consaDetalheBloquete?numeroBloquete=ID&vinculo=VINCULO&nome=NOME&curso=CURSO&ds_vinculo=DESC
+			 * Faz o parser do link Exemplo: &nbsp;&nbsp;<a href=
+			 * '/academico/consaDetalheBloquete?numeroBloquete=ID&vinculo=VINCULO&nome=NOME&curso=CURSO&ds_vinculo=DESC
 			 */
-			item.setDetailsId(getStringValue(cols, 9).split("\\?")[1].split("&")[0].split("=")[1]);
+			item.setDetailsId(getStringValue(cols, 9).split("\\?")[1]
+					.split("&")[0].split("=")[1]);
 			list.add(item);
 		}
 
 		return list;
 	}
-	
-	public static List<FinancialItem> parseItems(String html) throws ParseException {
+
+	public static List<FinancialItem> parseItems(String html) throws ParseException
+	{
 		Document document = Jsoup.parse(html);
 		return parseItems(document);
 	}
 
-	public static List<DetailsFinancialItem> parseDetailsItem(Document document) throws ParseException {
-		Elements tables = document.getElementsByAttributeValue("class", "bodyTable");
-		Element table = tables.get(0); 
+	public static List<DetailsFinancialItem> parseDetailsItem(Document document) throws ParseException
+	{
+		Elements tables = document.getElementsByAttributeValue("class",
+				"bodyTable");
+		Element table = tables.get(0);
 		Elements rows = table.getElementsByTag("tr");
 		List<DetailsFinancialItem> list = new ArrayList<>();
 
-		for (int i = 1; i < rows.size(); i++) {
+		for (int i = 1; i < rows.size(); i++)
+		{
 			Element row = rows.get(i);
 			Elements cols = row.getElementsByTag("font");
 			DetailsFinancialItem item = new DetailsFinancialItem();
@@ -134,12 +151,11 @@ public class FinancialUtils {
 
 		return list;
 	}
-	
-	
-	public static List<DetailsFinancialItem> parseDetailsItem(String html) throws ParseException {
+
+	public static List<DetailsFinancialItem> parseDetailsItem(String html) throws ParseException
+	{
 		Document document = Jsoup.parse(html);
 		return parseDetailsItem(document);
 	}
-
 
 }

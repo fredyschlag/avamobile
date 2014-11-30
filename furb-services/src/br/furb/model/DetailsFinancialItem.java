@@ -5,45 +5,50 @@ import java.util.Date;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
-public class DetailsFinancialItem {
+public class DetailsFinancialItem
+{
 
-	private String description; //Descrição
-	private Date issueDate; //Data de emissão
-	private double grossValue; //Valor bruto
-	private double discount; //Desconto
-	private double deductions; //Deduções
-	private double increase; //Acréscimo
-	private double fine; //Multa
+	private String description; // DescriÃ§Ã£o
+	private Date issueDate; // Data de emissÃ£o
+	private double grossValue; // Valor bruto
+	private double discount; // Desconto
+	private double deductions; // DeduÃ§Ãµes
+	private double increase; // AcrÃ©scimo
+	private double fine; // Multa
 
 	/**
 	 * 
-	 * @return Descrição
+	 * @return DescriÃ§Ã£o
 	 */
-	public String getDescription() {
+	public String getDescription()
+	{
 		return description;
 	}
 
 	/**
 	 * 
-	 * @param description Descrição
+	 * @param description DescriÃ§Ã£o
 	 */
-	public void setDescription(String description) {
+	public void setDescription(String description)
+	{
 		this.description = description;
 	}
 
 	/**
 	 * 
-	 * @return Data de emissão
+	 * @return Data de emissÃ£o
 	 */
-	public Date getIssueDate() {
+	public Date getIssueDate()
+	{
 		return issueDate;
 	}
 
 	/**
 	 * 
-	 * @param issueDate Data de emissão
+	 * @param issueDate Data de emissÃ£o
 	 */
-	public void setIssueDate(Date issueDate) {
+	public void setIssueDate(Date issueDate)
+	{
 		this.issueDate = issueDate;
 	}
 
@@ -51,7 +56,8 @@ public class DetailsFinancialItem {
 	 * 
 	 * @return Valor bruto
 	 */
-	public double getGrossValue() {
+	public double getGrossValue()
+	{
 		return grossValue;
 	}
 
@@ -59,7 +65,8 @@ public class DetailsFinancialItem {
 	 * 
 	 * @param grossValue Valor bruto
 	 */
-	public void setGrossValue(double grossValue) {
+	public void setGrossValue(double grossValue)
+	{
 		this.grossValue = grossValue;
 	}
 
@@ -67,7 +74,8 @@ public class DetailsFinancialItem {
 	 * 
 	 * @return Desconto
 	 */
-	public double getDiscount() {
+	public double getDiscount()
+	{
 		return discount;
 	}
 
@@ -75,39 +83,44 @@ public class DetailsFinancialItem {
 	 * 
 	 * @param discount Desconto
 	 */
-	public void setDiscount(double discount) {
+	public void setDiscount(double discount)
+	{
 		this.discount = discount;
 	}
 
 	/**
 	 * 
-	 * @return Deduções
+	 * @return DeduÃ§Ãµes
 	 */
-	public double getDeductions() {
+	public double getDeductions()
+	{
 		return deductions;
 	}
 
 	/**
 	 * 
-	 * @param deductions Deduções
+	 * @param deductions DeduÃ§Ãµes
 	 */
-	public void setDeductions(double deductions) {
+	public void setDeductions(double deductions)
+	{
 		this.deductions = deductions;
 	}
 
 	/**
 	 * 
-	 * @return Acréscimo
+	 * @return AcrÃ©scimo
 	 */
-	public double getIncrease() {
+	public double getIncrease()
+	{
 		return increase;
 	}
 
 	/**
 	 * 
-	 * @param increase Acréscimo
+	 * @param increase AcrÃ©scimo
 	 */
-	public void setIncrease(double increase) {
+	public void setIncrease(double increase)
+	{
 		this.increase = increase;
 	}
 
@@ -115,7 +128,8 @@ public class DetailsFinancialItem {
 	 * 
 	 * @return Multa
 	 */
-	public double getFine() {
+	public double getFine()
+	{
 		return fine;
 	}
 
@@ -123,9 +137,9 @@ public class DetailsFinancialItem {
 	 * 
 	 * @param fine Multa
 	 */
-	public void setFine(double fine) {
+	public void setFine(double fine)
+	{
 		this.fine = fine;
 	}
-	
 
 }
