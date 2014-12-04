@@ -34,6 +34,9 @@ public class LoginResource
 		{
 			boolean testMode = username.equalsIgnoreCase("test") && password.equalsIgnoreCase("test");
 			
+			if (username.equalsIgnoreCase("") || password.equalsIgnoreCase(""))
+				throw new Exception("Usuário ou Senha inválidos");
+			
 			TokensController controller = TokensController.getInstance();
 			
 			Client client = null;

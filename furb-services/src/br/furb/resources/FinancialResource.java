@@ -1,7 +1,6 @@
 package br.furb.resources;
 
 import java.text.ParseException;
-import java.util.LinkedList;
 import java.util.List;
 
 import javax.ws.rs.GET;
@@ -14,7 +13,6 @@ import javax.ws.rs.core.Response;
 import br.furb.client.FinancialClient;
 import br.furb.login.TokenLogin;
 import br.furb.login.TokensController;
-import br.furb.model.FinancialItem;
 import br.furb.model.Link;
 
 @Path("/financial")
@@ -28,22 +26,14 @@ public class FinancialResource {
 		TokenLogin tokenLogin = TokensController.getInstance().getToken(token);
 		FinancialClient client = new FinancialClient(tokenLogin.getClient());
 		List<Link> links = client.listLinks();
-		Link l = new Link();
-		l.setId(link);
-		int indice = links.indexOf(l);
-		l = links.get(indice);
 		try
-		{
-			// Devido à algum problema no Android, tive que limitar a quantidade de itens financeiros retornados.
-			final int limite = 30;
+		{			
+			Link l = new Link();
+			l.setId(link);
+			int indice = links.indexOf(l);
+			l = links.get(indice);
 			
-			List<FinancialItem> list = client.listItems(l);
-			List<FinancialItem> itens = new LinkedList<FinancialItem>();
-
-			for (int i = 0; i < limite; i++)
-				itens.add(list.get(i));
-			
-			return Response.ok(itens).build();
+			return Response.ok(client.listItems(l)).build();
 		} 
 		catch (ParseException e)
 		{
